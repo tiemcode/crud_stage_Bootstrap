@@ -86,6 +86,7 @@
     @yield('scripts')
     <STYLe>
         .ck {
+            height: 150px;
             color: black;
         }
     </STYLe>

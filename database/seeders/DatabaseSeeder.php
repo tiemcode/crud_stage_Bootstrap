@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             userSeeder::class,
             newsSeeder::class,
             projectSeeder::class,
-            rolesSeeder::class
+            rolesSeeder::class,
+            rolUserProjectSeeder::class,
+            tasksSeeder::class
         ]);
     }
 }

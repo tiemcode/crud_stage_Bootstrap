@@ -12,11 +12,15 @@ class Project extends Model
     protected $table = "projects";
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(user::class, 'project_user')->withPivot('role_id');;
+        return $this->belongsToMany(user::class, 'project_user')->withPivot('role_id');
     }
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'project_user');
     }
-    protected $fillable = ['name', 'intro' , 'description'];
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    protected $fillable = ['name', 'intro', 'description'];
 }

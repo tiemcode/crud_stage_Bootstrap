@@ -5,6 +5,8 @@ use App\Http\Controllers\postsController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\projectController;
 use App\Http\Controllers\rolesController;
+use App\Http\Controllers\taskController;
+use Illuminate\Console\View\Components\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +72,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/roles/search', [rolesController::class, 'search'])->name('roles.search');
 
         //tasks
-        // Route::get('/');
+        Route::get('/projects/{id}/tasks', [taskController::class, 'index'])->name('projects.task');
+        Route::get('/projects/{id}/tasks/add', [taskController::class, 'create'])->name('projects.task.add');
+        Route::post('/projects/{id}/tasks/delete/{task_id}', [taskController::class, 'delete'])->name('projects.task.delete');
+        Route::get('/projects/{project_id}/tasks/edit/{task_id}', [taskController::class, 'edit'])->name('projects.task.edit');
+        Route::get('/projects/{project_id}/tasks/edit/{task_id}/users', [taskController::class, 'editUser'])->name('projects.task.user');
+        route::post('/projects/{project_id}/tasks/edit/{task_id}/users/update', [taskController::class, 'updateUser'])->name('tast.user.update');
+        Route::post('/projects/{project_id}/tasks/added', [taskController::class, 'store'])->name('project.task.store');
     });
 });
 

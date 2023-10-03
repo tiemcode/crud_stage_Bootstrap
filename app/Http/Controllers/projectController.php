@@ -89,8 +89,10 @@ class projectController extends Controller
         DB::table('project_user')->insert([
             'project_id' => $id,
             'role_id' => $request->rollen,
-            'user_id' => $request->username
+            'user_id' => $request->user_id
         ]);
+         return redirect()->route("projects.user", ['id' => $id])->with('success', 'gebruiker succesvol toegevoegt');
+
     }
     public function search(Request $request)
     {

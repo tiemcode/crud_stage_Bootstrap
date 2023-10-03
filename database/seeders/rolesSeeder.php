@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\roles;
+use App\Http\Controllers\rolesController;
+use App\Models\role;
 use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class rolesSeeder extends Seeder
     {
         $arr = ['beheeder', 'developer', 'designer'];
         for ($i = 0; $i < count($arr); $i++) {
-            roles::insert(
+            role::insert(
                 [
                     'name' => $arr[$i],
                     'created_at' => date('y/m/d'),

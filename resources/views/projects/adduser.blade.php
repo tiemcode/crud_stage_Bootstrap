@@ -12,7 +12,7 @@
                 <div>
                     <label for="username" class="block text-sm font-medium">gebruikers naam</label>
                     <div class="mt-2">
-                        <select class="form-select rounded-md border-0 bg-white-5 py-1.5 shadow-sm ring-1 ring-inset ring-white-10 focus-ring-2 focus-ring-inset focus-ring-indigo-500" name="rollen" id="rollen">
+                        <select class="form-select rounded-md border-0 bg-white-5 py-1.5 shadow-sm ring-1 ring-inset ring-white-10 focus-ring-2 focus-ring-inset focus-ring-indigo-500" name="user_id" id="rollen">
                             @foreach ($user as $item)
                             <option class="text-black" value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach

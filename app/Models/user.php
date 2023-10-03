@@ -18,7 +18,11 @@ class user extends Authenticatable
     }
     public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Project::class , 'project_user');
+        return $this->belongsToMany(Project::class, 'project_user');
+    }
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class, 'task_user');
     }
     /**
      * The attributes that are mass assignable.
