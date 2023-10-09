@@ -20,8 +20,8 @@ class postsController extends Controller
     }
     public function showAdmin()
     {
-        $allPosts = Post::orderBy('created_at', 'desc')->paginate(6);
-        return view("articales.dashboard", ['allposts' => $allPosts]);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+        return view("articales.dashboard", compact('posts'));
     }
     public function edit($id)
     {
@@ -87,6 +87,6 @@ class postsController extends Controller
         $posts = $posts->orderBy('created_at', 'desc')
             ->paginate(6)
             ->appends(request()->query());
-        return view('articales.search', compact('posts'));
+        return view('articales.dashboard', compact('posts'));
     }
 }

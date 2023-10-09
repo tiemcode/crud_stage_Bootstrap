@@ -6,7 +6,8 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\projectController;
 use App\Http\Controllers\rolesController;
 use App\Http\Controllers\taskController;
-use Illuminate\Console\View\Components\Task;
+use App\Http\Controllers\attributeController;
+use App\Http\Controllers\productController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,12 @@ use Illuminate\Console\View\Components\Task;
 //home page
 Route::get('/', [postsController::class, 'index'])->name('home');
 Route::get('/projects', [projectController::class, 'home'])->name('project.home');
+Route::get('/product', [productController::class, 'home'])->name('product.home');
+
+
 //admin panel
 Route::get('/dashboard', [postsController::class, "showAdmin"])
     ->middleware(['auth'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     //logout button
     Route::post('/logoout', function () {
@@ -44,8 +47,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/category', [categoryController::class, 'index'])->name('category.index');
         Route::get('/category/add', [categoryController::class, "add"])->name('category.add');
         Route::post('/category/store', [categoryController::class, "store"])->name('category.added');
-        Route::get('/ashboard/catagory/id={id}', [categoryController::class, "edit"])->name('category.edit');
-        Route::post('/category/id={id}/edited', [categoryController::class, 'update'])->name('category.edited');
+        Route::get('/catagory/{id}/edit', [categoryController::class, "edit"])->name('category.edit');
+        Route::post('/category/{id}/edited', [categoryController::class, 'update'])->name('category.edited');
         Route::delete('/catagory/delete/{id}', [categoryController::class, "delete"])->name('category.delete');
         Route::get('/catagory/search', [categoryController::class, "search"])->name('search.category');
 
@@ -79,6 +82,33 @@ Route::middleware('auth')->group(function () {
         Route::get('/projects/{project_id}/tasks/edit/{task_id}/users', [taskController::class, 'editUser'])->name('projects.task.user');
         route::post('/projects/{project_id}/tasks/edit/{task_id}/users/update', [taskController::class, 'updateUser'])->name('tast.user.update');
         Route::post('/projects/{project_id}/tasks/added', [taskController::class, 'store'])->name('project.task.store');
+        //attritube
+
+        Route::prefix('/attributes')->group(function () {
+            Route::get('/', [attributeController::class, 'index'])->name('attributes.index');
+            Route::post('/added', [attributeController::class, 'store'])->name('attributes.added');
+            Route::get('/{id}/edit',  [attributeController::class, 'edit'])->name('attributes.edit');
+            Route::post('{id}/edited',  [attributeController::class, 'update'])->name('attributes.edited');
+            Route::post('/{id}/delete/',  [attributeController::class, 'delete'])->name('attributes.delete');
+            Route::get('/search',  [attributeController::class, 'search'])->name('attributes.search');
+        });
+        route::prefix('/products')->group(function () {
+            Route::get('/', [productController::class, 'index'])->name('products.index');
+            Route::get('/add', [productController::class, 'add'])->name('products.add');
+            Route::post('/added', [productController::class, 'store'])->name('products.store');
+            Route::get('/{id}/edit', [productController::class, 'edit'])->name('products.edit');
+            Route::post('/{id}/edited', [productController::class, 'update'])->name('products.edited');
+            Route::post('/{id}/delete', [productController::class, 'delete'])->name('products.delete');
+            Route::get('/search', [productController::class, 'search'])->name('products.search');
+            route::prefix('{productId}/attribute')->group(function () {
+                route::get('/', [productController::class, 'attributeIndex'])->name('products.attribute');
+                route::get('/add', [productController::class, 'attributeAdd'])->name('products.attribute.add');
+                route::post('/added', [productController::class, 'attributeStore'])->name('products.attribute.added');
+                route::get('/{attributeId}/edit', [productController::class, 'attributeEdit'])->name('products.attribute.edit');
+                route::post('/attributeId}/edited', [productController::class, 'attributeUpdate'])->name('products.attribute.edited');
+                route::post('/{attributeId}/delete', [productController::class, 'attributeDelete'])->name('products.attribute.delete');
+            });
+        });
     });
 });
 

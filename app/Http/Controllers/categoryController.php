@@ -28,7 +28,7 @@ class categoryController extends Controller
             return redirect::route('category.add');
         }
         $data = Category::where('id', $id)->first();
-        return view('categorys.edit', ['data' => $data]);
+        return view('categorys.edit', compact('id', 'data'));
     }
     public function update(Request $request, $id)
     {
