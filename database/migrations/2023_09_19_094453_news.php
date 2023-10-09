@@ -13,21 +13,19 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("name", 100);
             $table->timestamps();
         });
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('intro');
-            $table->string('description');
+            $table->text('intro');
+            $table->longtext('description');
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->date('date_posted');
             $table->timestamps();
 
             // Define the foreign key constraint
-        });
-        Schema::table('posts', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
         });
     }
 
