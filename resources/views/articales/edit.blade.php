@@ -36,7 +36,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
-                                <input type="submit" class="btn btn-primary" value="Voeg Toe">
+                                <input type="submit" class="btn btn-primary" value="Toevoegen">
                                 <a href="{{route('dashboard')}}" class="btn btn-link">Ga Terug</a>
                             </div>
                         </form>

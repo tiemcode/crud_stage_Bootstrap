@@ -6,7 +6,7 @@
             </h1>
             <div class="d-flex flex-row-reverse">
                 <button type="button" class="btn btn-primary  font-weight-semibold" data-bs-toggle="modal" data-bs-target="#addModal">
-                    Rol Toevoegen
+                    Toevoegen
                 </button>
             </div>
         </div>

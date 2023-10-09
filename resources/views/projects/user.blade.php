@@ -33,7 +33,7 @@
                         <tr class="border-b">
                             <td>Gebruikers</td>
                             <td>Rollen</td>
-                            <td>actie`s</td>
+                            <td>Actie`s</td>
                         </tr>
                         @forelse ($data->users as $user)
                             <tr class="border-b">

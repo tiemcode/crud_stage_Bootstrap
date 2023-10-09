@@ -11,7 +11,7 @@
         <div class="d-flex pt-3 items-center flex-column justify-content-center w-100 bg-dark-gray">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page">aanmaken</a>
+                    <a class="nav-link active " aria-current="page">Aanmaken</a>
                 </li>
             </ul>
 

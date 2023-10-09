@@ -10,7 +10,7 @@
         <div class="d-flex pt-3 items-center flex-column justify-content-center w-100 bg-dark-gray">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('projects.task.edit', ['task_id' => $task_id, 'project_id' => $id]) }}" aria-current="page">aanpasen</a>
+                    <a class="nav-link " href="{{ route('projects.task.edit', ['task_id' => $task_id, 'project_id' => $id]) }}" aria-current="page">Aanpasen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page">gebruikers</a>

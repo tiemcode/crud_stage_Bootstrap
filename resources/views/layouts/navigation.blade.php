@@ -20,6 +20,11 @@
                         {{ __('projecten') }}
                     </x-nav-link>
                 </li>
+                <li class="nav-item">
+                    <x-nav-link class="text-light" :href="route('product.home')" :active="request()->routeIs('product.home')">
+                        {{ __('producten') }}
+                    </x-nav-link>
+                </li>
             </ul>
         </div>
 

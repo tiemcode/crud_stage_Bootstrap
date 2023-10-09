@@ -8,7 +8,7 @@
             <div class="d-flex flex-row-reverse">
                 <a href="{{ route('addpost') }}">
                     <button type="button" class="btn btn-primary  font-weight-semibold">
-                        Artikel Toevoegen
+                        Toevoegen
                     </button>
                 </a>
             </div>
@@ -18,7 +18,7 @@
         <div class="my-2">
             <form action="{{ route('search.post') }}" class="d-flex flex-row flex-between">
                 <input type="text" name="search" id="search" class="form-control rounded py-2.5 me-1 text-gray-900 shadow-sm" placeholder="Zoeken">
-                <input type="submit" value="Ga Zoeken" class="btn btn-primary btn-sm font-weight-semibold ml-4">
+                <input type="submit" value="zoeken" class="btn btn-primary btn-sm font-weight-semibold ml-4">
             </form>
         </div>
         <table class="table shadow table-bordered table-striped ">
@@ -31,12 +31,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($allposts as $post)
+                @foreach ($posts as $post)
                 <tr>
                     <td class="p-2">
                         <h6>{{ Str::ucfirst($post->title) }}</h6>
                     </td>
-                    <td>{{ $post->category->name }}</td>
+                    <td>{{ Str::ucfirst( $post->category->name) }}</td>
                     <td>{{ date('d/m/Y', strtotime($post->date_posted)) }}</td>
                     <td>
                         <div class="d-flex justify-content-evenly  ">
@@ -53,7 +53,7 @@
 
         </table>
         <div>
-            {{ $allposts->links("pagination::bootstrap-5") }}
+            {{ $posts->links("pagination::bootstrap-5") }}
         </div>
         <style>
             svg {

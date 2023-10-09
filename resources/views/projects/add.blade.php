@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 d-flex justify-content-end">
-                                <input type="submit" class="btn btn-primary" value="Voeg Toe">
+                                <input type="submit" class="btn btn-primary" value="toevoegen">
                                 <a href="{{route('projects.index')}}" class="btn btn-link">Ga Terug</a>
                             </div>
                         </form>

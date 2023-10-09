@@ -68,7 +68,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="file_input">Upload bestand</label>
-                                <input name="file" class="form-control-file @error('file') is-invalid @enderror" id="file_input" type="file">
+                                <input name="file" class="form-control" id="file_input" type="file">
                                 @error('file')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -77,7 +77,7 @@
                             </div>
 
                             <div class="mb-3 d-flex flex-row-reverse ">
-                                <input type="submit" class="btn btn-primary" value="Voeg Toe">
+                                <input type="submit" class="btn btn-primary" value="toevoegen">
                                 <a href="{{route('dashboard')}}" class="btn btn-link">Ga Terug</a>
                             </div>
                         </form>

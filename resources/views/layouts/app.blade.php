@@ -72,10 +72,15 @@
                     <li>
                         <a href="{{ route('projects.index') }}" class="nav-link  p-3">Projecten</a>
                     </li>
-                    <li>
-                        <a href="{{ route('roles.index') }}" class="nav-link  p-3">Rolen</a>
+                    <a href="{{ route('roles.index') }}" class="nav-link  p-3">Rollen</a>
                     </li>
-                    <!-- Add more navigation links as needed -->
+                    <li>
+                        <a href="{{ route('products.index') }}" class="nav-link  p-3">producten </a>
+                    <li>
+                    <li>
+                        <a href="{{ route('attributes.index') }}" class="nav-link  p-3">Attributen</a>
+                    <li>
+                        <!-- Add more navigation links as needed -->
                 </ul>
                 {{ $slot }}
             </div>

@@ -8,7 +8,7 @@
             <div class="d-flex flex-row-reverse">
                 <a href="{{ route('projects.add') }}">
                     <button type="button" class="btn btn-primary">
-                        Project Toevoegen
+                        Toevoegen
                     </button>
                 </a>
             </div>
