@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('intro');
             $table->text('description');
-            $table->date('date_started');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        schema::dropIfExists('projects');   
+        schema::dropIfExists('projects');
     }
 };

@@ -87,27 +87,4 @@
         </div>
     </div>
     <!-- End Add category modal -->
-
-    <!-- Edit category modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Categorieën aanpassen</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        @csrf
-                        <div class="mb-3">
-                            <input type="text" name="title" class="form-control" id="inputField"
-                                placeholder="Enter something">
-                        </div>
-                        <button type="submit" class="btn btn-primary">aanpassen</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Edit category modal -->
 </x-app-layout>

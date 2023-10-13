@@ -29,7 +29,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="cate" class="form-label">Categorieën</label>
-                                <select name="cate" class="form-control">
+                                <select name="cate" class="js-example-basic-multiple form-control">
                                     @foreach ($catedata as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -45,4 +45,21 @@
             </div>
         </div>
     </div>
+    @section('scripts')
+    <script>
+        window.addEventListener('load', () => {
+            for (const name of ['description', ]) {
+                ClassicEditor
+                    .create(document.getElementById(name))
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+
+    @endsection
 </x-app-layout>

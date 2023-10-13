@@ -11,7 +11,7 @@ class StoreProjectValidation extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class StoreProjectValidation extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Een titel is verplicht.',
+            'name.required' => 'Een titel is verplicht.',
             'intro.required' => 'Een introductie is verplicht.',
             'description.required' => 'Een description is verplicht.',
         ];

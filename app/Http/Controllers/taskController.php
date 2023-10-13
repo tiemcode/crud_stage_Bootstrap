@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\task_user;
+use Hamcrest\Core\IsNot;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isEmpty;
 
 class taskController extends Controller
 {
@@ -32,46 +36,40 @@ class taskController extends Controller
     {
         return view('projects.addTask', compact('id'));
     }
-    public function store($id)
+    public function store($project_id)
     {
         $task = new task();
         $task->title = request('title');
         $task->description = request('description');
-        $task->project_id = $id;
+        $task->project_id = $project_id;
         $task->save();
-        return redirect()->route('projects.task', ['id' => $id])->with('success', 'taak succesvol toegevoegt');
+        return redirect()->route('projects.task', ['id' => $project_id])->with('success', 'taak succesvol toegevoegt');
     }
-    public function edit($id, $task_id)
+    public function edit($project_id, $task_id)
     {
 
-        $tasks = Task::where('id', $task_id)->first();
-        return view('projects.editTask', compact('id', 'task_id', 'tasks'));
-    }
-    public function editUser($id, $task_id, Project $project, Task $task)
-    {
-        // $users = $project->users();
-
-        // $users = User::whereDoesntHave('tasks', fn ($q) => $q->where('id', $task->id))
-        //     ->orderBy('name')
-        //     ->get();
         $projectId = DB::table('project_user')->pluck('user_id');
         $users = User::whereIn('id', $projectId)->get();
-        return view('projects.tasksUsers', compact('id',  'users', 'task_id'));
+        $tasks = Task::where('id', $task_id)->first();
+        return view('projects.editTask', compact('project_id', 'task_id', 'users', 'tasks'));
     }
-    public function updateUser(Request $request, $task_id, $id)
+    public function update(Request $request, $project_id, $task_id)
     {
-        DB::table('task_user')->where('task_id', $task_id)->update([
-            'user_id' => $request->input('users'),
-            'updated_at' => date('y-m-d'),
-        ]);
-        return redirect()->route('projects.task', ['id' => $id])->with('success', 'gebruiker succesvol toegevoegt');
+        if ($request->users != null) {
+            foreach ($request->users as $input) {
+                $taskUser = task_user::where('task_id', $task_id)->first();
+                dd($taskUser);
+                
+                $taskUser->user_id = $input;
+                $taskUser->updated_at = date('y-m-d', time());
+                $taskUser->save();
+            }
+        }
+        $task = task::where('id', $project_id)->first();
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->updated_at = date('y-m-d', time());
+        $task->save();
+        return redirect()->route('projects.task', ['id' => $project_id])->with('success', 'taak succesvol geupdate');
     }
-    // public function createTaskUser(Project $project, Task $task)
-    // {
-    //     $users = $project->users();
-
-    //     $users = User::whereDoesntHave('tasks', fn ($q) => $q->where('id', $task->id))
-    //         ->orderBy('name')
-    //         ->get();
-    // }
 }

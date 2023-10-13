@@ -22,5 +22,9 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+    public function task_user()
+    {
+        return $this->hasMany(task_user::class);
+    }
     protected $fillable = ['name', 'intro', 'description'];
 }

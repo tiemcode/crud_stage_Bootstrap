@@ -25,7 +25,7 @@ class storeProductValidation extends FormRequest
             "title" => "required",
             "description" => "required",
             "stock" => "required|integer",
-            "price" => "required|integer",
+            "price" => "required|decimal:0,2 ",
             "vat" => "required|integer",
             'img' => 'mimes:png,jpg,jpeg|max:2048'
         ];

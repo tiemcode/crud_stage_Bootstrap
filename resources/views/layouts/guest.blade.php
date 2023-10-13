@@ -27,11 +27,9 @@
     </header>
     @endif
 
-    <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center pt-4 bg-gray-100 dark:bg-gray-900">
-        <main class="flex-grow-1">
-            {{ $slot }}
-        </main>
-    </div>
+    <main class="flex-grow-1 mt-3 container ">
+        {{ $slot }}
+    </main>
 
 </body>
 

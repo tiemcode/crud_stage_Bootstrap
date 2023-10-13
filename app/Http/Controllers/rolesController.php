@@ -53,6 +53,6 @@ class rolesController extends Controller
         $roles = $roles->orderBy('created_at', 'desc')
             ->paginate(6)
             ->appends(request()->query());
-        return view('roles.search', compact('roles'));
+        return view('roles.dashboard', compact('roles'));
     }
 }

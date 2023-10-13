@@ -31,7 +31,7 @@
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
                                 <input type="submit" class="btn btn-primary" value="Voeg Toe">
-                                <a href="{{ route('products.attribute', ['id' => $id]) }}" class="btn btn-link">Ga
+                                <a href="{{ route('products.attribute', ['productId' => $id]) }}" class="btn btn-link">Ga
                                     Terug</a>
                             </div>
                         </form>

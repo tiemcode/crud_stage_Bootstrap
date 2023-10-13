@@ -55,7 +55,7 @@
                             </div>
                             <div class="mb-3 ">
                                 <label for="title" class="form-label">prijs</label>
-                                <input type="number" name="price" id="price" class="form-control" value="{{ $product->price }}" />
+                                <input type="number" step="0.01" name="price" id="price" class="form-control" value="{{ $product->price }}" />
                                 @error('price')
                                 <div>
                                     @foreach ($errors->get('price') as $message)

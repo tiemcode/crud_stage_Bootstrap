@@ -4,7 +4,8 @@
             <x-application-logo class="d-block h-9 w-auto fill-current  " />
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -13,11 +14,6 @@
                 <li class="nav-item text-light">
                     <x-nav-link class="text-light" :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('artikelen') }}
-                    </x-nav-link>
-                </li>
-                <li class="nav-item">
-                    <x-nav-link class="text-light" :href="route('project.home')" :active="request()->routeIs('project.home')">
-                        {{ __('projecten') }}
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
@@ -30,14 +26,29 @@
 
         <div class="ml-auto">
             @auth
-            <!-- Authentication -->
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-link text-white" :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
+                <div class="dropdown">
+                    <button class="btn btn-primary  dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">dashboard</a></li>
+                        <li><a class="dropdown-item" href="{{ route('project.home') }}">mijn projecten</a></li>
+                        <li>
+                            <!-- Authentication -->
+                            <form method="POST" class="dropdown-it" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="btn text-danger  " :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </button>
+                            </form>
+
+                        </li>
+                    </ul>
+                </div>
             @endauth
+
         </div>
     </div>
 </nav>

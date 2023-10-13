@@ -20,8 +20,7 @@
                     <a class="nav-link" href="{{ route('projects.edit', ['id' => $id]) }}">Aanpassen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('projects.user', ['id' => $id]) }}"
-                        aria-current="page">Gebruikers</a>
+                    <a class="nav-link " href="{{ route('projects.user', ['id' => $id]) }}" aria-current="page">Gebruikers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active">taken</a>
@@ -37,40 +36,35 @@
                             <td class="d-flex justify-content-center ">actie`s</td>
                         </tr>
                         @forelse ($project->tasks as $user)
-                            <tr class="border-b">
-                                <td>
-                                    {{ $user->title }}
-                                </td>
-                                <td>
-                                    @if ($user->finshed == 1)
-                                        <p>
-                                            voltooid
-                                        </p>
-                                    @else
-                                        <p>
-                                            bezig
-                                        </p>
-                                    @endif
-                                </td>
-                                <td colspan="2" >
-                                    <div class="d-flex justify-content-evenly">
-                                        <a
-                                            href='{{ route('projects.task.edit', ['project_id' => $id, 'task_id' => $user->id]) }}'>Edit</a>
-                                        <form id="formDelete" method="POST"
-                                            action="{{ route('projects.task.delete', ['id' => $id, 'task_id' => $user->id]) }}"
-                                            onsubmit="return confirm('Weet je zeker dat je deze wilt verwijderen?');">
-                                            @csrf
-                                            <input type="submit" value="{{ __('Delete') }}" class="btn btn-danger "
-                                                :href=" route('deletePost')"
-                                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr class="border-b">
+                            <td>
+                                {{ $user->title }}
+                            </td>
+                            <td>
+                                @if ($user->finshed == 1)
+                                <p>
+                                    voltooid
+                                </p>
+                                @else
+                                <p>
+                                    bezig
+                                </p>
+                                @endif
+                            </td>
+                            <td colspan="2">
+                                <div class="d-flex justify-content-evenly">
+                                    <a href='{{ route('projects.task.edit', ['project_id' => $id, 'task_id' => $user->id]) }}'>Edit</a>
+                                    <form id="formDelete" method="POST" action="{{ route('projects.task.delete', ['id' => $id, 'task_id' => $user->id]) }}" onsubmit="return confirm('Weet je zeker dat je deze wilt verwijderen?');">
+                                        @csrf
+                                        <input type="submit" value="{{ __('Delete') }}" class="btn btn-danger " :href=" route('deletePost')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                         @empty
-                            <tr>
-                                <td>geen gebruikers gevonden</td>
-                            </tr>
+                        <tr>
+                            <td>geen gebruikers gevonden</td>
+                        </tr>
                         @endforelse
 
                     </tbody>

@@ -9,16 +9,8 @@
 
     <div class="d-flex justify-content-center" style="width: 85%;">
         <div class="d-flex pt-3 items-center flex-column justify-content-center w-100 bg-dark-gray">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active " aria-current="page">aanpasen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('projects.task.user', ['task_id' =>$tasks->id , 'project_id' =>$id])}}" aria-current="page">gebruikers</a>
-                </li>
-            </ul>
             <div class="mt-2">
-                <form enctype="multipart/form-data" class="" action="{{ route('addedpost') }}">
+                <form enctype="multipart/form-data" class="" method="POST" action="{{ route('projects.task.edited' ,['project_id' => $project_id , 'task_id'=>$task_id ]) }}">
                     @csrf
                     <div class="row flex-row pt-4">
                         <div id="richt" class="col">
@@ -45,13 +37,23 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="mb-2 justify-content-end d-flex flex-row-reverse">
-                                <input type="submit" class="ml-3 mb-5 btn btn-primary btn-sm font-weight-bold px-3 py-2 text-sm shadow-sm hover-bg-indigo-500 focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500" value="toevoegen">
+                            <div class="mb-2">
+                                <label for="users">gebruikers</label>
+                                <select class="form-control js-example-basic-multiple" name="users[]" multiple="multiple">
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" />
+                                    {{$user->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-2 d-flex justify-content-end ">
                                 <a href="{{ route('projects.index') }}">
                                     <div class="mb-5 btn btn-link btn-sm font-weight-medium text-indigo-400 text-decoration-underline shadow-sm focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500">
                                         ga terug
                                     </div>
                                 </a>
+                                <input type="submit" class="ml-3 mb-5 btn btn-primary btn-sm font-weight-bold px-3 py-2 text-sm shadow-sm hover-bg-indigo-500 focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500" value="toevoegen">
                             </div>
                         </div>
                     </div>
@@ -74,6 +76,9 @@
                         console.error(error);
                     });
             }
+        });
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
         });
     </script>
     @endsection

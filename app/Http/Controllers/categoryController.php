@@ -40,7 +40,7 @@ class categoryController extends Controller
     public function delete($id)
     {
         Category::where('id', $id)->delete();
-        return Redirect::route('index.category');
+        return Redirect::route('category.index');
     }
     public function search(Request $request)
     {
@@ -53,6 +53,6 @@ class categoryController extends Controller
         $categorys = $categorys->orderBy('created_at', 'desc')
             ->paginate(6)
             ->appends(request()->query());
-        return view('categorys.search', compact('categorys'));
+        return view('categorys.category', compact('categorys'));
     }
 }

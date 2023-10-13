@@ -22,6 +22,17 @@ class projectSeeder extends Seeder
             'gerda',
 
         ];
+        Project::insert([
+            'name' => 'Revolutionize Retail: E-commerce Website Redesign',
+            'intro' => "In the digital age, having a strong online presence is crucial for businesses of all sizes. As consumers increasingly turn to the internet for their shopping needs, it's imperative that retailers have an engaging and user-friendly e-commerce website. Our project, titled 'Revolutionize Retail: E-commerce Website Redesign,' aims to transform the online shopping experience for both customers and businesses.",
+            'description' => "User-Centric Design: We will prioritize user experience (UX) by implementing intuitive navigation, clear product categorization, and a seamless checkout process. Responsive design will ensure a consistent experience across all devices.
+
+            Performance Optimization: Slow loading times and site glitches can deter potential customers. We will optimize the website's performance to ensure fast loading speeds and reliable operation.
+
+            Mobile-Friendly: With the increasing use of smartphones for online shopping, we'll ensure the website is fully mobile-responsive, offering a smooth shopping experience on all screen sizes.",
+            'updated_at' => date("Y/m/d"),
+            'created_at' => date("Y/m/d")
+        ]);
         for ($i = 0; $i < count($arr); $i++) {
 
             Project::insert(
@@ -29,7 +40,6 @@ class projectSeeder extends Seeder
                     'name' => $arr[$i],
                     'intro' => 'dit is een test',
                     'description' => 'description',
-                    'date_started' => date("Y/m/d"),
                     'updated_at' => date("Y/m/d"),
                     'created_at' => date("Y/m/d")
                 ]

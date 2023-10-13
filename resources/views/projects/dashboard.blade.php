@@ -26,23 +26,23 @@
         <table class="table table-bordered table-striped  ">
             <tbody>
                 <tr class="border-b border-gray-500">
-                    <td class="p-2">
+                    <th class="p-2">
                         Titel
-                    </td>
-                    <td class="p-2">
+                    </th>
+                    <th class="p-2">
                         <div class="d-flex justify-center">
                             <p>
                                 Aangemaakte Datum
                             </p>
                         </div>
-                    </td>
-                    <td class="p-2">
+                    </th>
+                    <th class="p-2">
                         <div class="d-flex justify-center">
                             <p>
                                 Acties
                             </p>
                         </div>
-                    </td>
+                    </th>
                 </tr>
                 @foreach ($project as $post)
                 <tr class="border-b border-gray-700">
@@ -52,12 +52,12 @@
                         </h6>
                     </td>
 
-                    <td class="w-20 p-2">
+                    <td class="w-20 col-2  p-2">
                         <div class="d-flex justify-center">
                             {{ date('d/m/Y', strtotime($post->date_started)) }}
                         </div>
                     </td>
-                    <td class="w-20 p-2">
+                    <td class="w-20 col-3 p-2">
                         <div class="d-flex justify-content-evenly">
                             <a href='{{ route('projects.edit', ['id' => $post->id]) }}'>Edit</a>
                             <form id="formDelete" method="POST" action="{{ route('projects.delete', ['id' => $post->id]) }}" onsubmit="return confirm('Weet je zeker dat je deze wilt verwijderen?');">

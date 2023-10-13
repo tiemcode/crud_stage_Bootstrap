@@ -23,8 +23,7 @@
                     <a class="nav-link active" aria-current="page">Gebruikers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('projects.task', ['id' => $data->id]) }}"
-                        aria-current="page">taken</a>
+                    <a class="nav-link" href="{{ route('projects.task', ['id' => $data->id]) }}" aria-current="page">taken</a>
                 </li>
             </ul>
             <div class="mt-2">
@@ -36,41 +35,36 @@
                             <td>Actie`s</td>
                         </tr>
                         @forelse ($data->users as $user)
-                            <tr class="border-b">
-                                <td>
-                                    @if ($user->pivot->user_id)
-                                        {{ $user->where('id', $user->pivot->user_id)->first()->name }}
-                                    @else
-                                        Geen gebruiker gevonden
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($user->pivot->role_id)
-                                        {{ $user->roles->where('id', $user->pivot->role_id)->first()->name }}
-                                    @else
-                                        Geen rol toegewezen
-                                    @endif
-                                </td>
-                                <td>
-                                    <div class="d-flex justify-content-evenly">
-                                        <a
-                                            href='{{ route('projects.user.edit', ['userId' => $user->id, 'projectId' => $data->id]) }}'>Edit</a>
-                                        <form id="formDelete" method="POST"
-                                            action="{{ route('projects.user.delete', ['id' => $user->id]) }}"
-                                            onsubmit="return confirm('Weet je zeker dat je deze wilt verwijderen?');">
-                                            @csrf
-                                            <input type="submit" value="{{ __('Delete') }}" class="btn btn-danger "
-                                                :href=" route('deletePost')"
-                                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr class="border-b">
+                            <td>
+                                @if ($user->pivot->user_id)
+                                {{ $user->where('id', $user->pivot->user_id)->first()->name }}
+                                @else
+                                Geen gebruiker gevonden
+                                @endif
+                            </td>
+                            <td>
+                                @if ($user->pivot->role_id)
+                                {{ $user->roles->where('id', $user->pivot->role_id)->first()->name }}
+                                @else
+                                Geen rol toegewezen
+                                @endif
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-evenly">
+                                    <a href='{{ route('projects.user.edit', ['userId' => $user->id, 'projectId' => $data->id]) }}'>Edit</a>
+                                    <form id="formDelete" method="POST" action="{{ route('projects.user.delete', ['id' => $user->id]) }}" onsubmit="return confirm('Weet je zeker dat je deze wilt verwijderen?');">
+                                        @csrf
+                                        <input type="submit" value="{{ __('Delete') }}" class="btn btn-danger " :href=" route('projects.user.delete')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
 
                         @empty
-                            <tr>
-                                <td>geen gebruikers gevonden</td>
-                            </tr>
+                        <tr>
+                            <td>geen gebruikers gevonden</td>
+                        </tr>
                         @endforelse
 
                     </tbody>

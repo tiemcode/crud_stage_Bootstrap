@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectValidation;
 use App\Models\Project;
 use App\Models\role;
+use App\Models\Task;
 use App\Models\user;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -14,7 +15,21 @@ class projectController extends Controller
 {
     public function home()
     {
-        return view('home.projects');
+        $projects = project::orderby('created_at', 'desc')->get();
+        $projects = auth()->user()->projects;
+        return view('home.projects', compact('projects'));
+    }
+    public function details(Project $project)
+    {
+        $this->authorize('hasProject', [Project::class, $project]);
+        return view('projects.details', compact('project'));
+    }
+    public function taskFinish(Request $request, $project)
+    {
+        $task = Task::where('id', $request->task)->first();
+        $task->finshed = $request->value;
+        $task->save();
+        return redirect()->route('project.details', ['project' => $project]);
     }
     public function index()
     {
@@ -30,14 +45,15 @@ class projectController extends Controller
         $data = Project::where('id', $id)->first();
         return view('projects.edit', compact('data',));
     }
-    public function update(Request $request, $id)
+    public function update(StoreProjectValidation $request, $id)
     {
-        project::where('id', $id)->update([
-            'name' => $request->input('title'),
-            'intro' => $request->input('intro'),
-            'description' => $request->input('description'),
-            'updated_at' => date('y-m-d'),
-        ]);
+        $project = Project::find($id);
+        $project->name =  $request->name;
+        $project->intro = $request->intro;
+        $project->description = $request->description;
+        $project->updated_at = date('y-m-d');
+        $project->save();
+        return redirect::route('projects.index')->with('success', 'project succesvol aangepast');
     }
     public function add()
     {
@@ -46,10 +62,11 @@ class projectController extends Controller
     public function store(StoreProjectValidation $request)
     {
         $project = new Project();
-        $project->title = $request->title;
+        $project->name = $request->name;
         $project->intro = $request->intro;
         $project->description = $request->description;
         $project->save();
+        return redirect::route('projects.index')->with('success', 'project succesvol aangepast');
     }
     public function delete($id)
     {
@@ -91,20 +108,19 @@ class projectController extends Controller
             'role_id' => $request->rollen,
             'user_id' => $request->user_id
         ]);
-         return redirect()->route("projects.user", ['id' => $id])->with('success', 'gebruiker succesvol toegevoegt');
-
+        return redirect()->route("projects.user", ['id' => $id])->with('success', 'gebruiker succesvol toegevoegt');
     }
     public function search(Request $request)
     {
         $searchTerm = "%" . $request->input('search') . "%";
         if ($searchTerm) {
-            $projects = Project::where('name', 'LIKE', $searchTerm);
+            $project = Project::where('name', 'LIKE', $searchTerm);
         } else {
-            $projects = project::query();
+            $project = project::query();
         }
-        $projects = $projects->orderBy('created_at', 'desc')
+        $project = $project->orderBy('created_at', 'desc')
             ->paginate(6)
             ->appends(request()->query());
-        return view('projects.search', compact('projects'));
+        return view('projects.dashboard', compact('project'));
     }
 }

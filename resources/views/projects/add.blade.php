@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
-            {{ __('Gebruiker Toevoegen') }}
+            {{ __('project Toevoegen') }}
         </h1>
     </x-slot>
 
@@ -15,8 +15,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title</label>
-                                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" />
-                                @error('title')
+                                <input type="text" name="name" id="title" class="form-control @error('name') is-invalid @enderror" />
+                                @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

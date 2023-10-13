@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->boolean('finshed');
+            $table->boolean('finshed')->nullable();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
