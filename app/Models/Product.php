@@ -13,4 +13,8 @@ class Product extends Model
     {
         return $this->hasMany(attribute_product::class);
     }
+    public function order_product()
+    {
+        return $this->belongsTo(Order_product::class);
+    }
 }
