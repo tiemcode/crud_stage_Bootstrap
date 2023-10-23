@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             rolUserProjectSeeder::class,
             tasksSeeder::class,
             productSeeder::class,
-            orderSeeder::class,
+            // orderSeeder::class,
         ]);
     }
 }

@@ -17,11 +17,56 @@ class productController extends Controller
         $allattribute = attribute_product::get();
         return view('home.product', compact('allproduct', 'allattribute'));
     }
-    //index function
+    //details function
+    public function details($id)
+    {
+        $product = Product::find($id);
+        $attributes = attribute_product::where('product_id', $id)->get();
+        return view('products.view', compact('product', 'attributes'));
+    }
+    //shoppingCart function
+    public function shoppingCart(Request $request, $productId)
+    {
 
+        // session()->flush();
+        $amount = $request->amount;
+        if (session()->has('cart')) {
+            $cart = session('cart');
+            // Check if the product ID exists in the cart
+            if (array_key_exists($productId, $cart)) {
+                // Product exists, update the amount
+                $cart[$productId][1] += $amount;
+            } else {
+                // Product doesn't exist, add it to the cart
+                $cart[$productId] = [$productId, $amount];
+            }
+            // Update the session with the updated cart
+            session(['cart' => $cart]);
+        } else {
+            // If 'cart' key doesn't exist in the session, create a new cart array
+            $cart = [$productId => [$productId, $amount]];
+            session(['cart' => $cart]);
+        }
+
+        return redirect()->route('product.home')->with('success', 'aan winkelmand toegevoegt');
+    }
+    public function search(Request $request)
+    {
+        $searchTerm = "%" . $request->input('search') . "%";
+        if ($searchTerm) {
+            $product = Product::where('title', 'LIKE', $searchTerm);
+        } else {
+            $product = Product::query();
+        }
+        $product = $product->orderBy('created_at', 'desc')
+            ->paginate(6)
+            ->appends(request()->query());
+        return view('products.index', compact('product'));
+    }
+    //index function
     public function index()
     {
-        $product = Product::paginate(6);
+        $product = Product::orderBy('created_at', 'desc')->paginate(6);
         return view('products.index', compact('product'));
     }
     //edit function

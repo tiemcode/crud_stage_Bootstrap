@@ -41,7 +41,7 @@
                         <a href='{{ route('products.edit', ['id' => $post->id]) }}'>Edit</a>
                     </td>
                     <td class="text-center">
-                        <form method="POST" action="{{ route('products.delete', ['id' => $post->id]) }}">
+                        <form method="POST" onsubmit=" alert('weet je zeker om deze te verwijderen')" action="{{ route('products.delete', ['id' => $post->id]) }}">
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>

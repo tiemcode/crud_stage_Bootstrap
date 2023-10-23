@@ -8,6 +8,9 @@ use App\Http\Controllers\rolesController;
 use App\Http\Controllers\taskController;
 use App\Http\Controllers\attributeController;
 use App\Http\Controllers\productController;
+use App\Http\Controllers\orderController;
+use App\Mail\ordermail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +22,25 @@ use App\Http\Controllers\productController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/testroute', function () {
+    $name = "Funny Coder";
+
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('testreceiver@gmail.com’')->send(new ordermail($name));
+});
 //home page
 Route::get('/', [postsController::class, 'index'])->name('home');
 Route::get('/product', [productController::class, 'home'])->name('product.home');
+Route::get('/product/{id}/details', [productController::class, 'details'])->name('product.details');
+Route::post('/product/{id}/details/cart', [productController::class, 'shoppingCart'])->name('product.cart');
+route::get('/cart', [orderController::class, 'cart'])->name('cart');
+route::post('/cart/update', [orderController::class, 'update'])->name('cart.update');
+route::post('/cart/remove', [orderController::class, 'remove'])->name('cart.remove');
+route::get('/cart/checkout', [orderController::class, 'checkout'])->name('cart.checkout');
+route::post('/cart/checkout/store', [orderController::class, 'store'])->name('cart.store');
+route::get('/cart/checkout/overview', [orderController::class, 'overview'])->name('cart.overview');
+route::post('/cart/checkout/overview/store', [orderController::class, 'storeOrder'])->name('cart.storeOrder');
 
 
 //admin panel

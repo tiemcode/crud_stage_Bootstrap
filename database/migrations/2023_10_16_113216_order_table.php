@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('phoneNumber');
             $table->integer('user_id')->nullable();
             $table->decimal('total_excl');
-            $table->integer('vat');
+            $table->decimal('vat');
             $table->decimal('total_incl');
             $table->timestamps();
         });

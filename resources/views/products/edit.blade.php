@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit product') }}
-        </h1>
+        <h3 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Aanpassen') }}
+        </h3>
     </x-slot>
 
     <div class="container mt-5">
@@ -43,7 +43,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">voorraad</label>
+                                <label for="title" class="form-label">Voorraad</label>
                                 <input type="number" name="stock" id="stock" class="form-control" value="{{ $product->stock }}" />
                                 @error('stock')
                                 <div>
@@ -54,7 +54,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 ">
-                                <label for="title" class="form-label">prijs</label>
+                                <label for="title" class="form-label">Prijs</label>
                                 <input type="number" step="0.01" name="price" id="price" class="form-control" value="{{ $product->price }}" />
                                 @error('price')
                                 <div>
@@ -65,7 +65,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="btw" class="from-label">btw</label>
+                                <label for="btw" class="from-label">BTW</label>
                                 <input type="number" name="vat" id="vat" class="form-control" value="{{ $product->vat }}" />
                                 @error('vat')
                                 <div>
@@ -78,8 +78,10 @@
 
                             <!-- //imgae upload -->
                             <div class="mb-3">
-                                <label for="image" class="form-label">foto</label>
-                                <input type="file" name="image" id="image" accept="image/*" class=" form-control" value="{{ $product->img }}" />
+                                <label for="image" class="form-label">Foto</label>
+                                <!-- <input type="file" name="image" value="{{ $product->img }}" /> -->
+                                <input name="imgae" type="file" accept="image/*" class=" form-control" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                <img id="output" src="{{ asset('storage/images/' . $product->img) }}" width="200px" />
                                 @error('image')
                                 <div>
                                     @foreach ($errors->get('image') as $message)

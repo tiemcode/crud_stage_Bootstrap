@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('quantity');
             $table->decimal('price_excl');
-            $table->integer('vat');
+            $table->decimal('vat');
             $table->decimal('price_incl');
             $table->timestamps();
         });

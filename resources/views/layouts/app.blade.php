@@ -44,13 +44,12 @@
             </div>
         </header>
         @endif
-
-        <div class="d-flex justify-content-center">
-            @if (session()->has('success'))
+        <!-- Page Content -->
+        <main class="container">  @if (session()->has('success'))
             <div class="pt-4">
                 <div class="alert alert-success">
                     <div class="d-flex align-items-center">
-                        <svg class="text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg class="text-success" style="width: 50px;" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
                         </svg>
                         <div class="ms-3">
@@ -60,9 +59,6 @@
                 </div>
             </div>
             @endif
-        </div>
-        <!-- Page Content -->
-        <main class="container">
             <div class="pt-4 d-flex justify-content-between">
                 <ul class="list-unstyled  bg-tertiary h-50   shadow-lg rounded ">
                     <li>

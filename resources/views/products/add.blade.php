@@ -20,23 +20,24 @@
                                 <textarea rows="8" cols="48" name="description" id="description" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">voorraad</label>
+                                <label for="title" class="form-label">Voorraad</label>
                                 <input type="number" name="stock" id="stock" class="form-control" />
                             </div>
                             <div class="mb-3 ">
-                                <label for="title" class="form-label">prijs</label>
+                                <label for="title" class="form-label">Prijs</label>
                                 <input type="number" name="price" id="price" class="form-control" />
                             </div>
                             <div class="mb-3">
-                                <label for="btw" class="from-label">btw</label>
+                                <label for="btw" class="from-label">BTW</label>
                                 <input type="number" name="vat" id="vat" class="form-control" />
                             </div>
 
                             <!-- //imgae upload -->
                             <div class="mb-3">
                                 <label for="image" class="form-label">foto</label>
-                                <input type="file" name="image" id="image" accept="image/*"
-                                    class=" form-control" />
+                                <input name="imgae" type="file" accept="image/*" class=" form-control" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                <img id="output" class="mt-3" width="200" />
+
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
                                 <input type="submit" class="btn btn-primary" value="Voeg Toe">
@@ -49,16 +50,16 @@
         </div>
     </div>
     @section('scripts')
-        <script>
-            window.addEventListener('load', () => {
-                for (const name of ['description']) {
-                    ClassicEditor
-                        .create(document.getElementById(name))
-                        .catch(error => {
-                            console.error(error);
-                        });
-                }
-            });
-        </script>
+    <script>
+        window.addEventListener('load', () => {
+            for (const name of ['description']) {
+                ClassicEditor
+                    .create(document.getElementById(name))
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+    </script>
     @endsection
 </x-app-layout>

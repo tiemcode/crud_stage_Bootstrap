@@ -4,23 +4,7 @@
             {{ __('Artikelen') }}
         </h1>
     </x-slot>
-    <div class="container-fluid">
-        <div class="d-flex justify-content-center align-items-center ">
-            @if (Route::has('login'))
-            <div class="position-fixed top-0 end-0 p-4 d-sm-block d-none">
-                @auth
-                <p></p>
-                @else
-                <a href="{{ route('login') }}" class="text-sm  text-black text-decoration-underline">Log in</a>
 
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="ml-4 text-sm  text-black text-decoration-underline">Register</a>
-                @endif
-                @endauth
-            </div>
-            @endif
-            <!-- Your content here -->
-        </div>
     </div>
     <div class="container">
         <div class="row mt-4">
