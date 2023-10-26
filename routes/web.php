@@ -9,6 +9,7 @@ use App\Http\Controllers\taskController;
 use App\Http\Controllers\attributeController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\PdfController;
 use App\Mail\ordermail;
 use Illuminate\Support\Facades\Mail;
 
@@ -41,6 +42,7 @@ route::get('/cart/checkout', [orderController::class, 'checkout'])->name('cart.c
 route::post('/cart/checkout/store', [orderController::class, 'store'])->name('cart.store');
 route::get('/cart/checkout/overview', [orderController::class, 'overview'])->name('cart.overview');
 route::post('/cart/checkout/overview/store', [orderController::class, 'storeOrder'])->name('cart.storeOrder');
+route::post('/cart/checkout/overview/store/email', [orderController::class, 'storeOrderMail'])->name('cart.storeOrderMail');
 
 
 //admin panel
@@ -52,9 +54,16 @@ Route::middleware('auth')->group(function () {
         return view('welcome');
     });
     route::prefix('/user')->group(function () {
-        Route::get('/projecten', [projectController::class, 'home'])->name('project.home');
-        Route::get('/projects/{project}/details', [projectController::class, 'details'])->name('project.details');
-        route::post('/projects/{project}/details/task', [projectController::class, 'taskFinish'])->name('task.finish');
+        Route::prefix('/projecten')->group(function () {
+            Route::get('/', [projectController::class, 'home'])->name('project.home');
+            Route::get('/{project}/details', [projectController::class, 'details'])->name('project.details');
+            route::post('/{project}/details/task', [projectController::class, 'taskFinish'])->name('task.finish');
+        });
+        Route::prefix('/order')->group(function () {
+            Route::get('/', [orderController::class, 'home'])->name('order.home');
+            Route::get('/{order}/details', [orderController::class, 'details'])->name('order.details');
+            Route::get('/{order}/details/pdf', [PdfController::class, 'generatePDF'])->name('pdf.download');
+        });
     });
     //artical page
     Route::prefix('/dashboard')->group(function () {
@@ -108,7 +117,7 @@ Route::middleware('auth')->group(function () {
         //update route
         Route::post('/projects/{project_id}/tasks/edited/{task_id}', [taskController::class, 'update'])->name('projects.task.edited');
         Route::get('/projects/{project_id}/tasks/edit/{task_id}/users', [taskController::class, 'editUser'])->name('projects.task.user');
-        // route::post('/projects/{project_id}/tasks/edit/{task_id}/users/update', [taskController::class, 'updateUser'])->name('tast.user.update');
+        route::post('/projects/{project_id}/tasks/edit/{task_id}/users/update', [taskController::class, 'updateUser'])->name('tast.user.update');
         Route::post('/projects/{project_id}/tasks/added', [taskController::class, 'store'])->name('project.task.store');
         //attritube
 

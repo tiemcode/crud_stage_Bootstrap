@@ -15,7 +15,7 @@ class projectController extends Controller
 {
     public function home()
     {
-        $projects = project::orderby('created_at', 'desc')->get();
+        $projects = project::orderbyDesc('created_at')->get();
         $projects = auth()->user()->projects;
         return view('home.projects', compact('projects'));
     }

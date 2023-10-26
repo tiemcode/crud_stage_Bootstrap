@@ -9,10 +9,30 @@ use App\Models\Order_product;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Mail;
 
 class orderController extends Controller
 {
+    public function home()
+    {
+        $orders = Order::orderby('created_at', 'desc')->get();
+        $orders = auth()->user()->orders;
+        return view('home.order', compact('orders'));
+    }
+    public function details(Order $order)
+    {
+        $this->authorize('Order', [Order::class, $order]);
+        $orderProduct = Order_product::where('order_id', $order->id)->get();
+        $addres = Address::where('order_id', $order->id)->get();
+        //get only the product from a order_product
+        $product = [];
+        foreach ($orderProduct as $item) {
+            $product[] = Product::find($item->product_id);
+        }
+
+        return view('products.details', compact('order', 'product', 'orderProduct', 'addres'));
+    }
+    //mail function
     public function cart()
     {
         $products = [];
@@ -230,8 +250,30 @@ class orderController extends Controller
             $order_product->save();
         }
         // Clear session data
+        $this->orderMail();
         session()->forget('cart');
         session()->forget('shoping_info');
         return redirect()->route('product.home')->with('success', 'Bedankt voor uw bestelling!');
+    }
+    private function orderMail()
+    {
+        $order = Order::get()->last();
+        $orderProduct = Order_product::where('order_id', $order->id)->get();
+        $addres = Address::where('order_id', $order->id)->get();
+        //get only the product from a order_product
+        $product = [];
+        foreach ($orderProduct as $item) {
+            $product[] = Product::find($item->product_id);
+        }
+        $fullname = $addres[0]['firstName'] . ' ' . $addres[0]['lastName'];
+
+        Mail::send('mail.order', compact(
+            'order',
+            'product',
+            'orderProduct',
+            'addres'
+        ), function ($message) use ($order, $fullname) {
+            $message->to($order['email'], $fullname)->subject('Order confirmation');
+        });
     }
 }

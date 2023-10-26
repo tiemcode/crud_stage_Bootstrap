@@ -24,13 +24,11 @@
                                 <p>Naam:
                                     {{ $shoping_info['first_name_billing'] . ' ' . $shoping_info['last_name_billing'] }}
                                 </p>
-                                <p>Email: {{ $shoping_info['email_billing'] }}</p>
                                 <p>Adres:
                                     {{ $shoping_info['street_billing'] }}
                                 </p>
                                 <p>Postcode: {{ $shoping_info['postalcade_billing'] }}</p>
                                 <p>Woonplaats: {{ $shoping_info['city_billing'] }}</p>
-                                <p>Telefoonnummer: {{ $shoping_info['phone_number_billing'] }}</p>
                             </div>
                         @endif
                     </div>

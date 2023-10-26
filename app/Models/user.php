@@ -25,6 +25,10 @@ class user extends Authenticatable
     {
         return $this->hasMany(Task::class, 'task_user');
     }
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

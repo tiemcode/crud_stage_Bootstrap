@@ -133,29 +133,6 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="mb-3 ">
-                            <label for="title" class="form-label">email</label>
-                            <input type="text" name="email_billing" id="price_billing" @if (session()->has('email_billing')) value="{!! $shoping_info['email_billing'] !!}" @endif
-                            class="form-control" />
-                        </div>
-                        @error('email_billing')
-                        <div>
-                            @foreach ($errors->get('email_billing') as $message)
-                            <p class="text-danger">{{ $message }}</p>
-                            @endforeach
-                        </div>
-                        @enderror
-                        <div class="mb-3">
-                            <label for="title" class="form-label">moblie nummer</label>
-                            <input type="number" name="phone_number_billing" id="stock" class="form-control" @if (session()->has('phone_number_billing')) value="{!! $shoping_info['phone_number_billing'] !!}" @endif />
-                        </div>
-                        @error('phone_number_billing')
-                        <div>
-                            @foreach ($errors->get('phone_number_billing') as $message)
-                            <p class="text-danger">{{ $message }}</p>
-                            @endforeach
-                        </div>
-                        @enderror
                         <div class="d-flex">
                             <div class="w-50 mb-3 me-3">
                                 <label for="voornaam" class="form-label">straat</label>
