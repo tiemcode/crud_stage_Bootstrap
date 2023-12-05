@@ -48,7 +48,7 @@ class productController extends Controller
             session(['cart' => $cart]);
         }
 
-        return redirect()->route('product.home')->with('success', 'aan winkelmand toegevoegt');
+        return redirect()->route('product.home')->with('success', 'aan winkelmand toegevoegd');
     }
     public function search(Request $request)
     {

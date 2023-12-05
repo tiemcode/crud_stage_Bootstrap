@@ -15,7 +15,7 @@
                         <form enctype="multipart/form-data" action="{{ route('products.attribute.edited', ['productId' => $id]) }}" method="post">
                             @csrf
                             <div class="mb-3">
-                                <label for="attribuut" class="form-label">attribuut</label>
+                                <label for="attribuut" class="form-label">Attribuut</label>
                                 <select name="attribuut" id="attribuut" class="form-control">
                                     <option selected value="{{ $attribute->attribute_id }}">
                                         {{ $attribute->attribute->title }}
@@ -26,13 +26,12 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="value" class="form-label">waarde</label>
+                                <label for="value" class="form-label">Waarde</label>
                                 <input value="{{$attribute->value}}" type="text" class="form-control" id="value" name="value">
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
                                 <input type="submit" class="btn btn-primary" value="Voeg Toe">
-                                <a href="{{ route('products.attribute', ['productId' => $id]) }}" class="btn btn-link">Ga
-                                    Terug</a>
+                                <a href="{{ route('products.attribute', ['productId' => $id]) }}" class="btn btn-link">Teruggaan</a>
                             </div>
                         </form>
                     </div>

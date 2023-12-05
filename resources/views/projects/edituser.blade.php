@@ -29,7 +29,7 @@
                 </div>
                 <div class="mt-2 d-flex flex-row-reverse">
                     <input type="submit" class="ml-3 mb-5 btn btn-primary" value="voeg toe">
-                    <a href="{{ route('projects.user', ['id' => $projectId]) }} " class="mb-5 btn btn-link">ga terug</a>
+                    <a href="{{ route('projects.user', ['id' => $projectId]) }} " class="mb-5 btn btn-link">Teruggaan</a>
                 </div>
             </form>
         </div>

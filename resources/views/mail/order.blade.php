@@ -106,7 +106,6 @@
             <div class="col-8">
                 <div class="card p-3">
                     <div class="d-flex justify-content-between flex-wrap">
-                        {{-- @dd($addres[0]) --}}
                         <div class="col-6">
                             <h5>Verzendadres</h5>
                             <p>{{ $addres[0]->firstName }} {{ $addres[0]->lastName }}</p>
@@ -134,10 +133,10 @@
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">naam</th>
-                                <th scope="col">Prijs <sub class="fst-italic "> excl btw</sub></th>
+                                <th scope="col">Prijs <sub class="fst-italic "> excl BTW</sub></th>
                                 <th scope="col">Aantal</th>
-                                <th scope="col">btw prijs</th>
-                                <th scope="col">Totaal</th>
+                                <th scope="col">BTW prijs</th>
+                                <th scope="col">totaal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,12 +144,12 @@
                             <?php
                             for ($i = 0; $i < count($orderProduct); $i++) {
                                 if ($orderProduct[$i]['product_id'] == $item->id) {
-                                    $quantity = $orderProduct[$i]['quantity'];
+                                    $amount = $orderProduct[$i]['amount'];
                                 }
                             }
                             $vat = round(($item->price * $item->vat) / 100, 2);
 
-                            $total = round($item->price * $quantity + $vat * $quantity, 2);
+                            $total = round($item->price * $amount + $vat * $amount, 2);
 
                             ?>
 
@@ -165,7 +164,7 @@
                                     <p>€ {{ $item->price }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $quantity }}</p>
+                                    <p>{{ $amount }}</p>
 
                                 </td>
                                 <td>
@@ -185,9 +184,9 @@
                 <div class="d-flex flex-column ">
                     <h4>Subtotaal</h4>
                     <p>€ {{ $order->total_excl }}</p>
-                    <h4>btw bedrag</h4>
+                    <h4>BTW bedrag</h4>
                     <p>€ {{ $order->vat }}</p>
-                    <h4>totale</h4>
+                    <h4>totaal </h4>
                     <p>€ {{ $order->total_incl }}</p>
                 </div>
             </div>

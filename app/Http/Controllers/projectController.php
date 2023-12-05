@@ -108,7 +108,7 @@ class projectController extends Controller
             'role_id' => $request->rollen,
             'user_id' => $request->user_id
         ]);
-        return redirect()->route("projects.user", ['id' => $id])->with('success', 'gebruiker succesvol toegevoegt');
+        return redirect()->route("projects.user", ['id' => $id])->with('success', 'gebruiker succesvol toegevoegd');
     }
     public function search(Request $request)
     {

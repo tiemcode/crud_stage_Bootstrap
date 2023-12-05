@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{{ route('project.details', $item) }}">{{ $item->name }}
+                            <a href="{{ route('project.details', $item) }}">{{ ucfirst($item->name) }}
                             </a>
 
                         </h5>

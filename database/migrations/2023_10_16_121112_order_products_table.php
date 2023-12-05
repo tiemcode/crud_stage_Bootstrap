@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->integer('product_id');
-            $table->integer('quantity');
+            $table->integer('amount');
             $table->decimal('price_excl');
             $table->decimal('vat');
             $table->decimal('price_incl');

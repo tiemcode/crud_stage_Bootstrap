@@ -65,7 +65,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="btw" class="from-label">BTW</label>
+                                <label for="BTW" class="from-label">BTW</label>
                                 <input type="number" name="vat" id="vat" class="form-control" value="{{ $product->vat }}" />
                                 @error('vat')
                                 <div>
@@ -92,7 +92,7 @@
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
                                 <input type="submit" class="btn btn-primary" value="Voeg Toe">
-                                <a href="{{ route('products.index') }}" class="btn btn-link">Ga Terug</a>
+                                <a href="{{ route('products.index') }}" class="btn btn-link">Teruggaan</a>
                             </div>
                         </form>
                     </div>

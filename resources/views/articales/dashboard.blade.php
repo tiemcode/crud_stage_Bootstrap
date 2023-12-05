@@ -18,7 +18,7 @@
         <div class="my-2">
             <form action="{{ route('search.post') }}" class="d-flex flex-row flex-between">
                 <input type="text" name="search" id="search" class="form-control rounded py-2.5 me-1 text-gray-900 shadow-sm" placeholder="Zoeken">
-                <input type="submit" value="zoeken" class="btn btn-primary btn-sm font-weight-semibold ml-4">
+                <input type="submit" value="Zoeken" class="btn btn-primary btn-sm font-weight-semibold ml-4">
             </form>
         </div>
         <table class="table shadow table-bordered table-striped ">

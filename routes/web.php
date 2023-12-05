@@ -10,9 +10,6 @@ use App\Http\Controllers\attributeController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\PdfController;
-use App\Mail\ordermail;
-use Illuminate\Support\Facades\Mail;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,13 +20,6 @@ use Illuminate\Support\Facades\Mail;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/testroute', function () {
-    $name = "Funny Coder";
-
-    // The email sending is done using the to method on the Mail facade
-    Mail::to('testreceiver@gmail.com’')->send(new ordermail($name));
-});
 //home page
 Route::get('/', [postsController::class, 'index'])->name('home');
 Route::get('/product', [productController::class, 'home'])->name('product.home');
@@ -43,6 +33,9 @@ route::post('/cart/checkout/store', [orderController::class, 'store'])->name('ca
 route::get('/cart/checkout/overview', [orderController::class, 'overview'])->name('cart.overview');
 route::post('/cart/checkout/overview/store', [orderController::class, 'storeOrder'])->name('cart.storeOrder');
 route::post('/cart/checkout/overview/store/email', [orderController::class, 'storeOrderMail'])->name('cart.storeOrderMail');
+route::get('/cart/checkout/succes', [orderController::class, 'storeSucces'])->name('cart.storeSucces');
+route::get('/cart/checkout/succes/{order}download', [PdfController::class, 'orderPDF'])->name('cart.download');
+
 
 
 //admin panel
@@ -54,12 +47,12 @@ Route::middleware('auth')->group(function () {
         return view('welcome');
     });
     route::prefix('/user')->group(function () {
-        Route::prefix('/projecten')->group(function () {
+        Route::prefix('/projects')->group(function () {
             Route::get('/', [projectController::class, 'home'])->name('project.home');
             Route::get('/{project}/details', [projectController::class, 'details'])->name('project.details');
             route::post('/{project}/details/task', [projectController::class, 'taskFinish'])->name('task.finish');
         });
-        Route::prefix('/order')->group(function () {
+        Route::prefix('/orders')->group(function () {
             Route::get('/', [orderController::class, 'home'])->name('order.home');
             Route::get('/{order}/details', [orderController::class, 'details'])->name('order.details');
             Route::get('/{order}/details/pdf', [PdfController::class, 'generatePDF'])->name('pdf.download');
@@ -145,6 +138,28 @@ Route::middleware('auth')->group(function () {
                 route::post('/attributeId}/edited', [productController::class, 'attributeUpdate'])->name('products.attribute.edited');
                 route::post('/{attributeId}/delete', [productController::class, 'attributeDelete'])->name('products.attribute.delete');
             });
+        });
+        route::prefix('/orders')->group(function () {
+            route::get('/', [orderController::class, 'index'])->name('orders.index');
+            route::prefix('/{order}')->group(function () {
+                route::get('/show', [orderController::class, 'show'])->name('orders.show');
+                route::prefix('/edit')->group(function () {
+                    route::get('/', [orderController::class, 'edit'])->name('orders.edit');
+                    route::prefix('/product')->group(function () {
+                        route::get('/', [orderController::class, 'editProduct'])->name('orders.editProduct');
+                        route::post('/update', [orderController::class, 'addproduct'])->name('orders.addproduct');
+                        route::post('/delete', [orderController::class, 'deleteProduct'])->name('orders.deleteproduct');
+                    });
+                    route::prefix('/address')->group(function () {
+                        route::get('/', [orderController::class, 'editaddress'])->name('orders.editAdress');
+                        route::post('/update_0', [orderController::class, 'updateaddress_0'])->name('orders.updateAdress_0');
+                        route::post('/update_1', [orderController::class, 'updateaddress_1'])->name('orders.updateAdress_1');
+                    });
+                });
+                route::delete('/delete', [orderController::class, 'delete'])->name('orders.delete');
+                route::post('/edited', [orderController::class, 'orderInfo'])->name('orders.edited');
+            });
+            route::get('/search', [orderController::class, 'search'])->name('orders.search');
         });
     });
 });

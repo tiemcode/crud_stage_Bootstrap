@@ -43,7 +43,7 @@ class taskController extends Controller
         $task->description = request('description');
         $task->project_id = $project_id;
         $task->save();
-        return redirect()->route('projects.task', ['id' => $project_id])->with('success', 'taak succesvol toegevoegt');
+        return redirect()->route('projects.task', ['id' => $project_id])->with('success', 'taak succesvol toegevoegd');
     }
     public function edit($project_id, $task_id)
     {
@@ -59,7 +59,7 @@ class taskController extends Controller
             foreach ($request->users as $input) {
                 $taskUser = task_user::where('task_id', $task_id)->first();
                 dd($taskUser);
-                
+
                 $taskUser->user_id = $input;
                 $taskUser->updated_at = date('y-m-d', time());
                 $taskUser->save();

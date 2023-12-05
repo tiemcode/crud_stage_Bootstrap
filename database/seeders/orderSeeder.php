@@ -27,7 +27,7 @@ class orderSeeder extends Seeder
         Order_product::insert([
             'order_id' => 1,
             'product_id' => 1,
-            'quantity' => 1,
+            'amount' => 1,
             'price_excl' => '100',
             'vat' => '21',
             'price_incl' => '121',

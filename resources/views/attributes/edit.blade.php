@@ -25,7 +25,7 @@
                             @enderror
                             <div class="d-flex justify-content-end">
                                 <input type="submit" class="btn btn-primary btn-sm font-weight-bold px-3 py-2 text-sm shadow-sm hover-bg-indigo-500 focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500" value="Voeg Toe">
-                                <a href="{{route('attributes.index')}}" class="btn btn-link btn-sm font-weight-medium text-indigo-400 text-decoration-underline focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500">Ga Terug</a>
+                                <a href="{{route('attributes.index')}}" class="btn btn-link btn-sm font-weight-medium text-indigo-400 text-decoration-underline focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500">Teruggaan</a>
                             </div>
                         </form>
                     </div>

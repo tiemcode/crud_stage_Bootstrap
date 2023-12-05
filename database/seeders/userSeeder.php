@@ -12,9 +12,21 @@ class userSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    /**
+     * The function inserts user data into a database table, creating an admin user and additional
+     * users with names and email addresses based on an array.
+     */
     public function run(): void
     {
-        $names = ['admin', 'timo', 'joost'];
+        user::insert([
+            'is_admin' => 1,
+            'name' => 'admin',
+            'email' => 'admin' . "@gmail.com",
+            'password' => Hash::make('adminadmin'),
+            'updated_at' => date("Y/m/d"),
+            'created_at' => date("Y/m/d")
+        ],);
+        $names = ['ige', 'timo', 'joost'];
         for ($i = 0; $i < count($names); $i++) {
             user::insert(
                 [
@@ -23,7 +35,8 @@ class userSeeder extends Seeder
                     'password' => Hash::make($names[$i] . $names[$i]),
                     'updated_at' => date("Y/m/d"),
                     'created_at' => date("Y/m/d")
-                ]
+                ],
+
             );
         }
     }

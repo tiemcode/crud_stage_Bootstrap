@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="d-flex justify-content-between">
             <h2 class="font-weight-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('product attribuut toevoegen') }}
+                {{ __('product attribuut Toevoegen') }}
             </h2>
         </div>
     </x-slot>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="mb-3 d-flex flex-row-reverse ">
                                 <input type="submit" class="btn btn-primary" value="Voeg Toe">
-                                <a href="{{ route('products.index') }}" class="btn btn-link">Ga Terug</a>
+                                <a href="{{ route('products.index') }}" class="btn btn-link">Teruggaan</a>
                             </div>
                         </form>
                     </div>

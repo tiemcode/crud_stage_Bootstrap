@@ -24,7 +24,7 @@
                             </div>
                             @enderror
                             <div class="d-flex justify-content-end ">
-                                <a href="{{route('category.index')}}" class="btn btn-link btn-sm font-weight-medium ">Ga Terug</a>
+                                <a href="{{route('category.index')}}" class="btn btn-link btn-sm font-weight-medium ">Teruggaan</a>
                                 <input type="submit" class="btn btn-primary btn-sm font-weight-bold" value="Voeg Toe">
                             </div>
                         </form>

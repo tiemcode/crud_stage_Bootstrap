@@ -37,7 +37,7 @@ class storeProductValidation extends FormRequest
             'description.required' => 'Een introductie is verplicht.',
             'stock.required' => 'Een voorraad is verplicht.',
             'price.required' => 'Een prijs is verplicht.',
-            'vat.required' => 'Een btw waarde is verplicht.',
+            'vat.required' => 'Een BTW waarde is verplicht.',
             'img.file' => 'de file extensie is niet tegestaan'
         ];
     }

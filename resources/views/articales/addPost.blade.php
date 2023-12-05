@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Artikel toevoegen') }}
+            {{ __('Artikel Toevoegen') }}
         </h1>
     </x-slot>
 
@@ -77,8 +77,8 @@
                             </div>
 
                             <div class="mb-3 d-flex flex-row-reverse ">
-                                <input type="submit" class="btn btn-primary" value="toevoegen">
-                                <a href="{{route('dashboard')}}" class="btn btn-link">Ga Terug</a>
+                                <input type="submit" class="btn btn-primary" value="Toevoegen">
+                                <a href="{{route('dashboard')}}" class="btn btn-link">Teruggaan</a>
                             </div>
                         </form>
                     </div>

@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
     <script defer src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
@@ -24,7 +26,7 @@
                 <h1 class="font-semibold text-xl text-gray-200 leading-tight">
                     {{ __('Dashboard') }}
                 </h1>
-                @if(route('dashboard'))
+                @if (route('dashboard'))
                 <div class="d-flex flex-row-reverse">
                     <a href="{{ route('addpost') }}">
                         <button type="button" class="btn btn-primary">
@@ -45,7 +47,8 @@
         </header>
         @endif
         <!-- Page Content -->
-        <main class="container">  @if (session()->has('success'))
+        <main class="container">
+            @if (session()->has('success'))
             <div class="pt-4">
                 <div class="alert alert-success">
                     <div class="d-flex align-items-center">
@@ -70,15 +73,25 @@
                     <li>
                         <a href="{{ route('projects.index') }}" class="nav-link  p-3">Projecten</a>
                     </li>
-                    <a href="{{ route('roles.index') }}" class="nav-link  p-3">Rollen</a>
+                    <li>
+                        <a href="{{ route('roles.index') }}" class="nav-link  p-3">Rollen</a>
                     </li>
                     <li>
-                        <a href="{{ route('products.index') }}" class="nav-link  p-3">producten </a>
-                    <li>
+                        <a href="{{ route('products.index') }}" class="nav-link  p-3">Producten </a>
+                    </li>
                     <li>
                         <a href="{{ route('attributes.index') }}" class="nav-link  p-3">Attributen</a>
+                    </li>
+                    <?php
+
+                    use App\Models\User;
+                    ?>
+                    @can('isAdmin', User::class)
                     <li>
-                        <!-- Add more navigation links as needed -->
+                        <a href="{{ route('orders.index') }}" class="nav-link  p-3">Bestellingen</a>
+                    </li>
+                    @endcan
+                    <!-- Add more navigation links as needed -->
                 </ul>
                 {{ $slot }}
             </div>
@@ -87,12 +100,12 @@
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
     @yield('scripts')
-    <STYLe>
+    <style>
         .ck {
             height: 150px;
             color: black;
         }
-    </STYLe>
+    </style>
 </body>
 
 </html>

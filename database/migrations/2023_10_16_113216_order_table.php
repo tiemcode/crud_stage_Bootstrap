@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('fullName');
             $table->string('email');
             $table->integer('phoneNumber');
             $table->integer('user_id')->nullable();

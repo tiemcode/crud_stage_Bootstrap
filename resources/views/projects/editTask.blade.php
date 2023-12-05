@@ -50,10 +50,10 @@
                             <div class="mb-2 d-flex justify-content-end ">
                                 <a href="{{ route('projects.index') }}">
                                     <div class="mb-5 btn btn-link btn-sm font-weight-medium text-indigo-400 text-decoration-underline shadow-sm focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500">
-                                        ga terug
+                                        Teruggaan
                                     </div>
                                 </a>
-                                <input type="submit" class="ml-3 mb-5 btn btn-primary btn-sm font-weight-bold px-3 py-2 text-sm shadow-sm hover-bg-indigo-500 focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500" value="toevoegen">
+                                <input type="submit" class="ml-3 mb-5 btn btn-primary btn-sm font-weight-bold px-3 py-2 text-sm shadow-sm hover-bg-indigo-500 focus-visible-outline focus-visible-outline-2 focus-visible-outline-offset-2 focus-visible-outline-indigo-500" value="Toevoegen">
                             </div>
                         </div>
                     </div>
