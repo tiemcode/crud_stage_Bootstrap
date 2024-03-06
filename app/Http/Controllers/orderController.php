@@ -49,19 +49,13 @@ class orderController extends Controller
             }
             //calulate the total price from shopping cart
             $subtotal = 0;
-            foreach ($products as $product) {
-                $subtotal += $product->price * $product->amount;
-            }
             $vatTotal = 0;
-            foreach ($products as $product) {
-                $vatTotal += $product->price * $product->amount * $product->vat / 100;
-            }
             $totalPrice = 0;
-            foreach ($products as $product) {
-                $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
-            }
             $totalAmount = 0;
             foreach ($products as $product) {
+                $subtotal += $product->price * $product->amount;
+                $vatTotal += $product->price * $product->amount * $product->vat / 100;
+                $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
                 $totalAmount += $product->amount;
             }
         } else {
@@ -125,19 +119,13 @@ class orderController extends Controller
             }
             //calulate the total price from shopping cart
             $subtotal = 0;
-            foreach ($products as $product) {
-                $subtotal += $product->price * $product->amount;
-            }
             $vatTotal = 0;
-            foreach ($products as $product) {
-                $vatTotal += $product->price * $product->amount * $product->vat / 100;
-            }
             $totalPrice = 0;
-            foreach ($products as $product) {
-                $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
-            }
             $totalAmount = 0;
             foreach ($products as $product) {
+                $subtotal += $product->price * $product->amount;
+                $vatTotal += $product->price * $product->amount * $product->vat / 100;
+                $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
                 $totalAmount += $product->amount;
             }
         } else {
@@ -154,49 +142,41 @@ class orderController extends Controller
         session()->put('shoping_info', $request->all());
         return redirect()->route("cart.overview");
     }
-    public function overview()
-    {
-        //get all data from session
-        $products = [];
-        if (session()->has('cart')) {
-            foreach (session('cart') as $key) {
-                $product = Product::find($key[0]);
-                $product->amount = $key[1];
-                $products[] = $product;
-            }
-            //calulate the total price from shopping cart
-            $subtotal = 0;
-            foreach ($products as $product) {
-                $subtotal += $product->price * $product->amount;
-            }
-            $vatTotal = 0;
-            foreach ($products as $product) {
-                $vatTotal += $product->price * $product->amount * $product->vat / 100;
-            }
-            $totalPrice = 0;
-            foreach ($products as $product) {
-                $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
-            }
-            $totalAmount = 0;
-            foreach ($products as $product) {
-                $totalAmount += $product->amount;
-            }
-        } else {
-            $totalAmount = 0;
-            $totalPrice = 0;
-            $vatTotal = 0;
-            $subtotal = 0;
+public function overview()
+{
+    //get all data from session
+    $products = [];
+    if (session()->has('cart')) {
+        foreach (session('cart') as $key) {
+            $product = Product::find($key[0]);
+            $product->amount = $key[1];
+            $products[] = $product;
         }
-        $shoping_info = session('shoping_info');
-        //save the subtotal , vattotal , totalprice in the session
-        $shoping_info['subtotal'] = $subtotal;
-        $shoping_info['vatTotal'] = $vatTotal;
-        $shoping_info['totalPrice'] = $totalPrice;
-        $shoping_info['totalAmount'] = $totalAmount;
-        session()->put('shoping_info', $shoping_info);
-        // dd(session());
-        return view('cart.overview', compact('products', 'subtotal', 'vatTotal', 'totalPrice', 'totalAmount', 'shoping_info'));
+        //calulate the total price from shopping cart
+        $subtotal = 0;
+        $vatTotal = 0;
+        $totalPrice = 0;
+        $totalAmount = 0;
+        foreach ($products as $product) {
+            $subtotal += $product->price * $product->amount;
+            $vatTotal += $product->price * $product->amount * $product->vat / 100;
+            $totalPrice += $product->price * $product->amount * $product->vat / 100 + $product->price * $product->amount;
+            $totalAmount += $product->amount;
+        }
+    } else {
+        $totalAmount = 0;
+        $totalPrice = 0;
+        $vatTotal = 0;
+        $subtotal = 0;
     }
+    $shoping_info = session('shoping_info');
+    $shoping_info['subtotal'] = $subtotal;
+    $shoping_info['vatTotal'] = $vatTotal;
+    $shoping_info['totalPrice'] = $totalPrice;
+    $shoping_info['totalAmount'] = $totalAmount;
+    session()->put('shoping_info', $shoping_info);
+    return view('cart.overview', compact('products', 'subtotal', 'vatTotal', 'totalPrice', 'totalAmount', 'shoping_info'));
+}
     public function storeOrder()
     {
 
